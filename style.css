@@ -8,6 +8,10 @@
 }
 body{
     background-color: #4285f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
 }
 .wrapper{
     width: 370px;
@@ -26,12 +30,22 @@ body{
 }
 .select-btn span.material-symbols-outlined{
     font-size: 31px;
+    transition: transform 0.3s ease-out;
 }
 .content{
+    /*without 'active' class content is hidden*/
+    display: none;
     background-color: #fff;
     margin-top: 15px;
     padding: 20px;
     border-radius: 7px;
+}
+.wrapper.active .content{
+    /*when adding 'active' class content appears*/
+    display: block;
+}
+.wrapper.active .select-btn span.material-symbols-outlined{
+    transform: rotate(-180deg);
 }
 .content .search{
     position: relative;
@@ -41,11 +55,40 @@ body{
     width: 100%;
     font-size: 17px;
     padding: 0 15px 0 43px;
-    outline: none;
-    border: 1px solid ;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
 }
 .search span.material-symbols-outlined{
     position: absolute;
     left: 15px;
     line-height: 53px;
+    color: #999;
+    font-size: 22px;
+}
+.content .options{
+    margin-top: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+.options::-webkit-scrollbar{
+    width: 7px;
+}
+.options::-webkit-scrollbar-track{
+    background-color: #f1f1f1;
+    border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb{
+    background-color: #ccc;
+    border-radius: 25px;
+}
+.options li{
+    height: 50px;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-size: 21px;
+}
+.options li:hover, li.selected{
+    background-color: #f2f2f2;
 }
