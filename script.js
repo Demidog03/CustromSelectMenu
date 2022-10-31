@@ -10,22 +10,33 @@ selectBtn.addEventListener('click', () => {
 })
 searchInp.addEventListener('keyup', () => { //when typing keys
     let arr = []
+
     let searchedVal = searchInp.value.toLowerCase()
     //returning all countries which starts from inserted value in search bar
-    arr = countries.filter(data => {
+    let splitedArr = countries.filter(data => {
         return data.toLowerCase().startsWith(searchedVal) //do not change to lowercase in result, just when filtering
-    }).map(data => `<li onclick="updateName(this)">${data}</li>`).join("") //join creates an array seperated by commas or a specified separator string
-
-    // for(let i=0; i<arr.length; i++){
-    //     if(arr[i].innerHTML === selectBtn.innerHTML.toLowerCase()){
-    //         arr[i] = `<li onclick="updateName(this)" class="isSelected">${arr[i].innerHTML}</li>`;
-    //     }
-    //     arr.replace()
-    // }
+    }).map(data => `<li onclick="updateName(this)">${data}</li>`)
+    arr = splitedArr.join(" ")
+    //join creates an array seperated by commas or a specified separator string
 
     options.innerHTML = arr ? arr : `<p>Country not found</p>`
-})
 
+    //When typing in search bar class 'selected does not add'
+    //So need to check and update the lists
+    splitedArr.forEach((element, index) => {
+        console.log(splitedArr[index])
+        if(splitedArr[index].includes(selectBtn.firstElementChild.innerHTML)){
+            let result = (`<li onclick="updateName(this)" class="selected">${selectBtn.firstElementChild.innerHTML}</li>`)
+            splitedArr[index] = result
+            console.log(splitedArr[index])
+            return splitedArr[index]
+
+        }
+
+    })
+    arr = splitedArr.join(" ")
+    options.innerHTML = arr ? arr : `<p>Country not found</p>`
+})
 
 const addCountry = (selectedCountry) => {
     options.innerHTML = ''
